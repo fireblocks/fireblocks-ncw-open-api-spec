@@ -193,10 +193,10 @@ paths:
           required: false
           in: query
           schema:
-            default:
-              enum:
-                - id
             type: string
+            enum:
+              - id
+            default: id
         - name: order
           required: false
           in: query
