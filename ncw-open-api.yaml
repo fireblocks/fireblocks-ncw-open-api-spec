@@ -702,7 +702,7 @@ paths:
 info:
   title: NCW API
   description: The NCW API description
-  version: '1.1'
+  version: '1.2'
   contact:
     email: support@fireblocks.com
 tags:
@@ -712,7 +712,13 @@ tags:
   - name: Devices
   - name: RPC
 servers:
-    - url: "https://sandbox-api.fireblocks.io"
+    - url: https://{environment}.fireblocks.io
+      variables:
+        environment:
+          default: api
+          enum:
+            - api
+            - sandbox-api
 x-readme:
     explorer-enabled: false
     samples-languages:    
