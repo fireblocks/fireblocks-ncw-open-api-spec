@@ -104,6 +104,32 @@ paths:
                 $ref: '#/components/schemas/WalletDto'
       tags:
         - Wallets
+  /v1/ncw/wallets/{walletId}/backup/latest:
+    get:
+      operationId: getLatestBackup
+      x-readme:
+        code-samples:
+          - language: javascript
+            code: await fireblocks.NCW.getLatestBackup("walletId")
+            name: Fireblocks Javascript NCW SDK example
+      summary: Get wallet Latest Backup details
+      description: Get wallet Latest Backup details, including the deviceId, and backup time. 
+      parameters:
+        - name: walletId
+          required: true
+          in: path
+          schema:
+            type: string
+            example: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LatestBackupResponse'
+      tags:
+        - Wallets
   /v1/ncw/wallets/{walletId}/enable:
     put:
       operationId: enableWallet
@@ -193,10 +219,10 @@ paths:
           required: false
           in: query
           schema:
+            default:
+              enum:
+                - id
             type: string
-            enum:
-              - id
-            default: id
         - name: order
           required: false
           in: query
@@ -555,7 +581,7 @@ paths:
       x-readme:
         code-samples:
           - language: javascript
-            code: const devices = await fireblocks.NCW.getWalletDevices("walletId")
+            code: todo
             name: Fireblocks Javascript NCW SDK example
       summary: Get registered devices
       description: Get registered devices for a specific Non Custodial Wallet
@@ -583,7 +609,7 @@ paths:
       x-readme:
         code-samples:
           - language: javascript
-            code: const enableDevice = await fireblocks.NCW.enableWalletDevice("walletId", "deviceId", true)
+            code: todo
             name: Fireblocks Javascript NCW SDK example
       summary: Enable or Disable device
       description: Enable or Disable a device under a specific Non Custodial Wallet
@@ -651,58 +677,10 @@ paths:
                   - $ref: '#/components/schemas/RpcErrorDto'
       tags:
         - RPC
-  /v1/wallets/supported_assets:
-    get:
-      operationId: getSupportedAssets
-      x-readme:
-        code-samples:
-          - language: javascript
-            code: |
-              const supportedAssets = await fireblocks.NCW.getSupportedAssets(
-                {
-                  undefined, 
-                  undefined, 
-                  true
-                }
-              )
-            name: Fireblocks Javascript NCW SDK example
-      summary: Retrieve supported assets
-      parameters:
-        - name: pageCursor
-          required: false
-          in: query
-          description: Cursor to the next page
-          schema:
-            type: string
-        - name: pageSize
-          required: false
-          in: query
-          description: Amount of results to return in the next page
-          schema:
-            type: number
-            default: 10
-            maximum: 50
-        - name: onlyBaseAssets
-          required: false
-          in: query
-          description: Only base assets
-          schema:
-            type: boolean
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetAssetsResponse"
-      tags:
-        - Assets
-      security:
-        - bearer: []
 info:
   title: NCW API
   description: The NCW API description
-  version: '1.2'
+  version: '1.0'
   contact:
     email: support@fireblocks.com
 tags:
@@ -712,13 +690,7 @@ tags:
   - name: Devices
   - name: RPC
 servers:
-    - url: https://{environment}.fireblocks.io
-      variables:
-        environment:
-          default: api
-          enum:
-            - api
-            - sandbox-api
+    - url: "https://sandbox-api.fireblocks.io"
 x-readme:
     explorer-enabled: false
     samples-languages:    
@@ -1024,3 +996,41 @@ components:
           example: '{"method":"request_mpc_setup","params":[{"algorithms":["MPC_CMP_ECDSA_SECP256K1","MPC_EDDSA_ED25519"]}],"headers":{"sdkVersion":1}}'
       required:
         - payload
+    LatestBackupKey:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        publicKey:
+          type: string
+        keyId:
+          type: string
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        algorithm:
+          type: string
+          enum:
+           - MPC_CMP_ECDSA_SECP256K1
+           - MPC_EDDSA_ED25519
+      required:
+        - deviceId
+        - publicKey
+        - keyId  
+        - algorithm
+    LatestBackupResponse:
+      type: object
+      properties:
+        passphraseId:
+          type: string
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        createdAt:
+          type: number
+          example: 1707673441529
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/LatestBackupKey'          
+      required:
+        - passphraseId
+        - createdAt
+        - keys
