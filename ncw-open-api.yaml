@@ -603,6 +603,54 @@ paths:
                   $ref: '#/components/schemas/DeviceDto'
       tags:
         - Devices
+  /v1/wallets/supported_assets:
+    get:
+      operationId: getSupportedAssets
+      x-readme:
+        code-samples:
+          - language: javascript
+            code: |
+              const supportedAssets = await fireblocks.NCW.getSupportedAssets(
+                {
+                  undefined, 
+                  undefined, 
+                  true
+                }
+              )
+            name: Fireblocks Javascript NCW SDK example
+      summary: Retrieve supported assets
+      parameters:
+        - name: pageCursor
+          required: false
+          in: query
+          description: Cursor to the next page
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          description: Amount of results to return in the next page
+          schema:
+            type: number
+            default: 10
+            maximum: 50
+        - name: onlyBaseAssets
+          required: false
+          in: query
+          description: Only base assets
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAssetsResponse"
+      tags:
+        - Assets
+      security:
+        - bearer: []
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/enable:
     put:
       operationId: enableDevice
