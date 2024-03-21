@@ -130,6 +130,27 @@ paths:
                 $ref: '#/components/schemas/LatestBackupResponse'
       tags:
         - Wallets
+  /v1/wallets/{walletId}/setup_status:
+    get:
+      operationId: getWalletSetupState
+      summary: Get wallet key setup state
+      parameters:
+        - name: walletId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletSetupStatusResponse'
+      tags:
+        - Wallets
+      security:
+        - bearer: []
   /v1/ncw/wallets/{walletId}/enable:
     put:
       operationId: enableWallet
@@ -685,6 +706,27 @@ paths:
           description: ''
       tags:
         - Devices
+  /v1/wallets/{walletId}/devices/{deviceId}/setup_status:
+    get:
+      operationId: getDeviceSetupState
+      summary: Get device key setup state
+      parameters:
+        - name: deviceId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceKeySetupResponse'
+      tags:
+        - Devices
+      security:
+        - bearer: []        
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/invoke:
     post:
       operationId: invokeRpc
@@ -1082,3 +1124,60 @@ components:
         - passphraseId
         - createdAt
         - keys
+    KeySetup:
+      type: object
+      properties:
+        status:
+          type: string
+        algorithmName:
+          type: string
+        confirmed:
+          type: boolean
+        backedUp:
+          type: boolean
+      required:
+        - status
+        - algorithmName
+        - confirmed
+        - backedUp
+    DeviceSetupStatus:
+      type: object
+      properties:
+        status:
+          type: string
+        setupStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySetup'
+        deviceId:
+          type: string
+      required:
+        - status
+        - setupStatus
+        - deviceId
+    WalletSetupStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        deviceSetupStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceSetupStatus'
+      required:
+        - status
+        - deviceSetupStatus
+    DeviceKeySetupResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        setupStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySetup'
+        deviceId:
+          type: string
+      required:
+        - status
+        - setupStatus                    
