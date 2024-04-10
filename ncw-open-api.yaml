@@ -771,11 +771,11 @@ paths:
                   - $ref: "#/components/schemas/RpcResultDto"
                   - $ref: "#/components/schemas/RpcErrorDto"
       tags:
-        - RPC
+        - Non Custodial Wallets RPC
 info:
   title: NCW API
   description: The NCW API description
-  version: "1.0"
+  version: "1.0.1"
   contact:
     email: support@fireblocks.com
 tags:
@@ -783,7 +783,7 @@ tags:
   - name: Non Custodial Wallet Accounts
   - name: Non Custodial Wallet Assets
   - name: Non Custodial Wallet Devices
-  - name: RPC
+  - name: Non Custodial Wallets RPC
 servers:
   - url: "https://sandbox-api.fireblocks.io"
 x-readme:
