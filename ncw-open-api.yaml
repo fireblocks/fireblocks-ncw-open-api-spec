@@ -12,14 +12,14 @@ paths:
       description: Create new Non Custodial Wallet
       parameters: []
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WalletDto'
+                $ref: "#/components/schemas/WalletDto"
       tags:
-        - Wallets
+        - Non Custodial Wallets
     get:
       x-readme:
         code-samples:
@@ -68,16 +68,16 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetWalletsResponse'
-        '400':
+                $ref: "#/components/schemas/GetWalletsResponse"
+        "400":
           description: Query parameters were invalid
       tags:
-        - Wallets
+        - Non Custodial Wallets
   /v1/ncw/wallets/{walletId}:
     get:
       x-readme:
@@ -94,16 +94,16 @@ paths:
           in: path
           schema:
             type: string
-            example: '550e8400-e29b-41d4-a716-446655440000'
+            example: "550e8400-e29b-41d4-a716-446655440000"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WalletDto'
+                $ref: "#/components/schemas/WalletDto"
       tags:
-        - Wallets
+        - Non Custodial Wallets
   /v1/ncw/wallets/{walletId}/backup/latest:
     get:
       operationId: getLatestBackup
@@ -113,7 +113,7 @@ paths:
             code: await fireblocks.NCW.getLatestBackup("walletId")
             name: Fireblocks Javascript NCW SDK example
       summary: Get wallet Latest Backup details
-      description: Get wallet Latest Backup details, including the deviceId, and backup time. 
+      description: Get wallet Latest Backup details, including the deviceId, and backup time.
       parameters:
         - name: walletId
           required: true
@@ -122,14 +122,14 @@ paths:
             type: string
             example: "550e8400-e29b-41d4-a716-446655440000"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LatestBackupResponse'
+                $ref: "#/components/schemas/LatestBackupResponse"
       tags:
-        - Wallets
+        - Non Custodial Wallets
   /v1/wallets/{walletId}/setup_status:
     get:
       operationId: getWalletSetupState
@@ -141,14 +141,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WalletSetupStatusResponse'
+                $ref: "#/components/schemas/WalletSetupStatusResponse"
       tags:
-        - Wallets
+        - Non Custodial Wallets
       security:
         - bearer: []
   /v1/ncw/wallets/{walletId}/enable:
@@ -157,7 +157,7 @@ paths:
       x-readme:
         code-samples:
           - language: javascript
-            code: await fireblocks.NCW.enableWallet("walletId", true) 
+            code: await fireblocks.NCW.enableWallet("walletId", true)
             name: Fireblocks Javascript NCW SDK example
       summary: Enable or disable a wallet
       description: Enable or disable a Non Custodial Wallet
@@ -173,12 +173,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EnableWalletDto'
+              $ref: "#/components/schemas/EnableWalletDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
-        - Wallets
+        - Non Custodial Wallets
   /v1/ncw/wallets/{walletId}/accounts:
     post:
       operationId: createAccount
@@ -197,14 +197,14 @@ paths:
             type: string
             example: "550e8400-e29b-41d4-a716-446655440000"
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDto'
+                $ref: "#/components/schemas/AccountDto"
       tags:
-        - Accounts
+        - Non Custodial Wallet Accounts
     get:
       operationId: findAllAccounts
       x-readme:
@@ -260,14 +260,14 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAccountsResponse'
+                $ref: "#/components/schemas/GetAccountsResponse"
       tags:
-        - Accounts
+        - Non Custodial Wallet Accounts
   /v1/ncw/wallets/{walletId}/accounts/{accountId}:
     get:
       operationId: findOneAccount
@@ -292,14 +292,14 @@ paths:
             type: number
             example: 0
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountDto'
+                $ref: "#/components/schemas/AccountDto"
       tags:
-        - Accounts
+        - Non Custodial Wallet Accounts
   /v1/ncw/wallets/{walletId}/accounts/{accountId}/assets:
     get:
       operationId: getAssets
@@ -366,14 +366,14 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAssetsResponse'
+                $ref: "#/components/schemas/GetAssetsResponse"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
   /v1/ncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}:
     get:
       operationId: getAsset
@@ -404,14 +404,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetResponseDto'
+                $ref: "#/components/schemas/AssetResponseDto"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
     post:
       operationId: addAsset
       x-readme:
@@ -441,14 +441,14 @@ paths:
           schema:
             type: string
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddressDetails'
+                $ref: "#/components/schemas/AddressDetails"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
   /v1/ncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}/balance:
     put:
       operationId: refreshAssetBalance
@@ -479,14 +479,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetBalance'
+                $ref: "#/components/schemas/AssetBalance"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
     get:
       operationId: getAssetBalance
       x-readme:
@@ -516,14 +516,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetBalance'
+                $ref: "#/components/schemas/AssetBalance"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
   /v1/ncw/wallets/{walletId}/accounts/{accountId}/assets/{assetId}/addresses:
     get:
       operationId: getAddresses
@@ -588,14 +588,14 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAddressesResponse'
+                $ref: "#/components/schemas/GetAddressesResponse"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
   /v1/ncw/wallets/{walletId}/devices:
     get:
       operationId: getDevices
@@ -614,16 +614,16 @@ paths:
             type: string
             example: "550e8400-e29b-41d4-a716-446655440000"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DeviceDto'
+                  $ref: "#/components/schemas/DeviceDto"
       tags:
-        - Devices
+        - Non Custodial Wallet Devices
   /v1/wallets/supported_assets:
     get:
       operationId: getSupportedAssets
@@ -669,7 +669,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GetAssetsResponse"
       tags:
-        - Assets
+        - Non Custodial Wallet Assets
       security:
         - bearer: []
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/enable:
@@ -700,12 +700,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EnableDeviceDto'
+              $ref: "#/components/schemas/EnableDeviceDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
-        - Devices
+        - Non Custodial Wallet Devices
   /v1/wallets/{walletId}/devices/{deviceId}/setup_status:
     get:
       operationId: getDeviceSetupState
@@ -715,23 +715,23 @@ paths:
           required: true
           in: path
           schema:
-            type: string      
+            type: string
         - name: deviceId
           required: true
           in: path
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceKeySetupResponse'
+                $ref: "#/components/schemas/DeviceKeySetupResponse"
       tags:
-        - Devices
+        - Non Custodial Wallet Devices
       security:
-        - bearer: []        
+        - bearer: []
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/invoke:
     post:
       operationId: invokeRpc
@@ -760,36 +760,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RpcRequestDto'
+              $ref: "#/components/schemas/RpcRequestDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/RpcResultDto'
-                  - $ref: '#/components/schemas/RpcErrorDto'
+                  - $ref: "#/components/schemas/RpcResultDto"
+                  - $ref: "#/components/schemas/RpcErrorDto"
       tags:
         - RPC
 info:
   title: NCW API
   description: The NCW API description
-  version: '1.0'
+  version: "1.0"
   contact:
     email: support@fireblocks.com
 tags:
-  - name: Wallets
-  - name: Accounts
-  - name: Assets
-  - name: Devices
+  - name: Non Custodial Wallets
+  - name: Non Custodial Wallet Accounts
+  - name: Non Custodial Wallet Assets
+  - name: Non Custodial Wallet Devices
   - name: RPC
 servers:
-    - url: "https://sandbox-api.fireblocks.io"
+  - url: "https://sandbox-api.fireblocks.io"
 x-readme:
-    explorer-enabled: false
-    samples-languages:    
-        - javascript
+  explorer-enabled: false
+  samples-languages:
+    - javascript
 components:
   securitySchemes:
     bearer:
@@ -822,9 +822,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/WalletDto'
+            $ref: "#/components/schemas/WalletDto"
         paging:
-          $ref: '#/components/schemas/Paging'
+          $ref: "#/components/schemas/Paging"
       required:
         - data
     EnableWalletDto:
@@ -853,9 +853,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/AccountDto'
+            $ref: "#/components/schemas/AccountDto"
         paging:
-          $ref: '#/components/schemas/Paging'
+          $ref: "#/components/schemas/Paging"
       required:
         - data
     AssetResponseDto:
@@ -924,9 +924,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/AssetResponseDto'
+            $ref: "#/components/schemas/AssetResponseDto"
         paging:
-          $ref: '#/components/schemas/Paging'
+          $ref: "#/components/schemas/Paging"
       required:
         - data
     AddressDetails:
@@ -1027,7 +1027,7 @@ components:
         allocatedBalances:
           type: array
           items:
-            $ref: '#/components/schemas/AllocatedAssetBalance'
+            $ref: "#/components/schemas/AllocatedAssetBalance"
       required:
         - id
         - rewardInfo
@@ -1037,9 +1037,9 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/AddressDetails'
+            $ref: "#/components/schemas/AddressDetails"
         paging:
-          $ref: '#/components/schemas/Paging'
+          $ref: "#/components/schemas/Paging"
       required:
         - data
     DeviceDto:
@@ -1066,7 +1066,7 @@ components:
       properties:
         result:
           type: object
-          example: '{ ... }'
+          example: "{ ... }"
       required:
         - result
     RpcErrorDto:
@@ -1105,12 +1105,12 @@ components:
         algorithm:
           type: string
           enum:
-           - MPC_CMP_ECDSA_SECP256K1
-           - MPC_EDDSA_ED25519
+            - MPC_CMP_ECDSA_SECP256K1
+            - MPC_EDDSA_ED25519
       required:
         - deviceId
         - publicKey
-        - keyId  
+        - keyId
         - algorithm
     LatestBackupResponse:
       type: object
@@ -1124,7 +1124,7 @@ components:
         keys:
           type: array
           items:
-            $ref: '#/components/schemas/LatestBackupKey'          
+            $ref: "#/components/schemas/LatestBackupKey"
       required:
         - passphraseId
         - createdAt
@@ -1153,7 +1153,7 @@ components:
         setupStatus:
           type: array
           items:
-            $ref: '#/components/schemas/KeySetup'
+            $ref: "#/components/schemas/KeySetup"
         deviceId:
           type: string
       required:
@@ -1168,7 +1168,7 @@ components:
         deviceSetupStatus:
           type: array
           items:
-            $ref: '#/components/schemas/DeviceSetupStatus'
+            $ref: "#/components/schemas/DeviceSetupStatus"
       required:
         - status
         - deviceSetupStatus
@@ -1180,9 +1180,9 @@ components:
         setupStatus:
           type: array
           items:
-            $ref: '#/components/schemas/KeySetup'
+            $ref: "#/components/schemas/KeySetup"
         deviceId:
           type: string
       required:
         - status
-        - setupStatus                    
+        - setupStatus
