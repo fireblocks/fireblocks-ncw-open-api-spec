@@ -1,4 +1,31 @@
 openapi: 3.0.0
+externalDocs:
+  url: https://ncw-developers.fireblocks.com/docs/getting-started
+  description: Fireblocks Non Custodial Wallet Documentation
+info:
+  title: Fireblocks NCW
+  description: Fireblocks Non Custodial Wallet Open API Specification
+  version: "1.0.2"
+  contact:
+    url: "support@fireblocks.com"
+tags:
+  - name: Non Custodial Wallets
+  - name: Non Custodial Wallet Accounts
+  - name: Non Custodial Wallet Assets
+  - name: Non Custodial Wallet Devices
+  - name: Non Custodial Wallets RPC
+servers:
+  - url: "https://sandbox-api.fireblocks.io"
+    description: Fireblocks Sandbox Environment
+  - url: "https://api.fireblocks.io"
+    description: Fireblocks Production Environment
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+    - javascript
+security:
+  - bearerTokenAuth: []
+  - ApiKeyAuth: []
 paths:
   /v1/ncw/wallets:
     post:
@@ -766,30 +793,6 @@ paths:
                   - $ref: "#/components/schemas/RpcErrorDto"
       tags:
         - Non Custodial Wallets RPC
-info:
-  title: NCW API
-  description: The NCW API description
-  version: "1.0.2"
-  contact:
-    email: support@fireblocks.com
-tags:
-  - name: Non Custodial Wallets
-  - name: Non Custodial Wallet Accounts
-  - name: Non Custodial Wallet Assets
-  - name: Non Custodial Wallet Devices
-  - name: Non Custodial Wallets RPC
-servers:
-  - url: "https://sandbox-api.fireblocks.io"
-    description: Fireblocks Sandbox Environment
-  - url: "https://api.fireblocks.io"
-    description: Fireblocks Production Environment
-x-readme:
-  explorer-enabled: false
-  samples-languages:
-    - javascript
-security:
-    - bearerTokenAuth: []
-    - ApiKeyAuth: []
 components:
   securitySchemes:
     bearerTokenAuth:
@@ -800,7 +803,7 @@ components:
       type: apiKey
       in: header
       name: X-API-Key
-  
+
   schemas:
     WalletDto:
       type: object
