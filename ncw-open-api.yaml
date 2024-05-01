@@ -149,8 +149,6 @@ paths:
                 $ref: "#/components/schemas/WalletSetupStatusResponse"
       tags:
         - Non Custodial Wallets
-      security:
-        - bearer: []
   /v1/ncw/wallets/{walletId}/enable:
     put:
       operationId: enableWallet
@@ -670,8 +668,6 @@ paths:
                 $ref: "#/components/schemas/GetAssetsResponse"
       tags:
         - Non Custodial Wallet Assets
-      security:
-        - bearer: []
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/enable:
     put:
       operationId: enableDevice
@@ -730,8 +726,6 @@ paths:
                 $ref: "#/components/schemas/DeviceKeySetupResponse"
       tags:
         - Non Custodial Wallet Devices
-      security:
-        - bearer: []
   /v1/ncw/wallets/{walletId}/devices/{deviceId}/invoke:
     post:
       operationId: invokeRpc
@@ -775,7 +769,7 @@ paths:
 info:
   title: NCW API
   description: The NCW API description
-  version: "1.0.1"
+  version: "1.0.2"
   contact:
     email: support@fireblocks.com
 tags:
@@ -786,16 +780,27 @@ tags:
   - name: Non Custodial Wallets RPC
 servers:
   - url: "https://sandbox-api.fireblocks.io"
+    description: Fireblocks Sandbox Environment
+  - url: "https://api.fireblocks.io"
+    description: Fireblocks Production Environment
 x-readme:
   explorer-enabled: false
   samples-languages:
     - javascript
+security:
+    - bearerTokenAuth: []
+    - ApiKeyAuth: []
 components:
   securitySchemes:
-    bearer:
+    bearerTokenAuth:
+      type: http
       scheme: bearer
       bearerFormat: JWT
-      type: http
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  
   schemas:
     WalletDto:
       type: object
