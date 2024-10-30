@@ -888,7 +888,7 @@ components:
         baseAsset:
           type: string
         ethNetwork:
-          type: number
+          type: string
         ethContractAddress:
           type: string
         issuerAddress:
