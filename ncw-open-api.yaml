@@ -15,10 +15,10 @@ tags:
   - name: Non Custodial Wallet Devices
   - name: Non Custodial Wallets RPC
 servers:
-  - url: "https://sandbox-api.fireblocks.io"
-    description: Fireblocks Sandbox Environment
   - url: "https://api.fireblocks.io"
     description: Fireblocks Production Environment
+  - url: "https://sandbox-api.fireblocks.io"
+    description: Fireblocks Sandbox Environment
 x-readme:
   explorer-enabled: false
   samples-languages:
