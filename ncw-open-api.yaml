@@ -204,7 +204,7 @@ paths:
           description: ""
       tags:
         - Non Custodial Wallets
-  /ncw/{walletId}/accounts/{accountId}/{assetId}/{change}/{addressIndex}/public_key_info:
+  /v1/ncw/{walletId}/accounts/{accountId}/{assetId}/{change}/{addressIndex}/public_key_info:
     get:
       summary: Get the public key of an asset
       description: >-
@@ -318,7 +318,7 @@ paths:
             response =
             fireblocks.embedded_wallets.get_public_key_info_for_address_ncw(wallet_id,
             account_id, asset_id, change, address_index, compressed);
-  /ncw/{walletId}/public_key_info:
+  /v1/ncw/{walletId}/public_key_info:
     get:
       summary: Get the public key for a derivation path
       description: >-
