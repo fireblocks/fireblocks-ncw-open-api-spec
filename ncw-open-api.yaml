@@ -204,6 +204,225 @@ paths:
           description: ""
       tags:
         - Non Custodial Wallets
+  /v1/ncw/{walletId}/accounts/{accountId}/{assetId}/{change}/{addressIndex}/public_key_info:
+    get:
+      summary: Get the public key of an asset
+      description: >-
+        Gets the public key of an asset associated with a specific account
+        within a Non-Custodial Wallet
+      tags:
+        - Non Custodial Wallets
+      x-readme:
+        code-samples:
+          - language: javascript
+            code: >
+              const publicKeyInfoByAccountAssetArgs = {
+                assetId: 'ETH',
+                accountId: 0,
+                change: 0,
+                addressIndex: 0,
+                compressed: true
+              };            
+
+              const pubKey = await
+              fireblocks.NCW.getPublicKeyInfoByAccountAsset(walletId,
+              publicKeyInfoByAccountAssetArgs);
+            name: Fireblocks SDK Javascript example
+          - language: typescript
+            code: >-
+              const response: Promise<FireblocksResponse<PublicKeyInformation>>
+              =
+              fireblocks.embeddedWallets.getPublicKeyInfoForAddressNcw(embeddedWalletsApiGetPublicKeyInfoForAddressNcwRequest);
+            name: Fireblocks SDK TypeScript example
+          - language: java
+            code: >-
+              CompletableFuture<ApiResponse<PublicKeyInformation>> response =
+              fireblocks.embeddedWallets().getPublicKeyInfoForAddressNcw(walletId,
+              accountId, assetId, change, addressIndex, compressed);
+            name: Fireblocks SDK Java example
+          - language: python
+            code: >-
+              response =
+              fireblocks.embedded_wallets.get_public_key_info_for_address_ncw(wallet_id,
+              account_id, asset_id, change, address_index, compressed);
+            name: Fireblocks SDK Python example
+      parameters:
+        - in: path
+          name: walletId
+          description: The ID of the Non-Custodial wallet
+          required: true
+          schema:
+            type: string
+            example: 550e8400-e29b-41d4-a716-446655440000
+        - in: path
+          name: accountId
+          description: The ID of the account
+          required: true
+          schema:
+            type: string
+            format: numeric
+            example: '0'
+        - in: path
+          name: assetId
+          description: The ID of the asset
+          required: true
+          schema:
+            type: string
+            x-fb-entity: asset
+            example: BTC
+        - in: path
+          name: change
+          description: BIP44 derivation path - change value
+          required: true
+          schema:
+            type: number
+            example: 0
+        - in: path
+          name: addressIndex
+          description: BIP44 derivation path - index value
+          required: true
+          schema:
+            type: number
+            example: 0
+        - in: query
+          name: compressed
+          description: Compressed/Uncompressed public key format
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Public Key Information
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKeyInformation'
+        default:
+          $ref: '#/components/responses/Error'
+      operationId: getPublicKeyInfoForAddressNcw
+      x-codeSamples:
+        - lang: TypeScript
+          source: >-
+            const response: Promise<FireblocksResponse<PublicKeyInformation>> =
+            fireblocks.embeddedWallets.getPublicKeyInfoForAddressNcw(embeddedWalletsApiGetPublicKeyInfoForAddressNcwRequest);
+        - lang: Java
+          source: >-
+            CompletableFuture<ApiResponse<PublicKeyInformation>> response =
+            fireblocks.embeddedWallets().getPublicKeyInfoForAddressNcw(walletId,
+            accountId, assetId, change, addressIndex, compressed);
+        - lang: Python
+          source: >-
+            response =
+            fireblocks.embedded_wallets.get_public_key_info_for_address_ncw(wallet_id,
+            account_id, asset_id, change, address_index, compressed);
+  /v1/ncw/{walletId}/public_key_info:
+    get:
+      summary: Get the public key for a derivation path
+      description: >-
+        Gets the public key information based on derivation path and signing
+        algorithm within a Non-Custodial Wallet
+      tags:
+        - Non Custodial Wallets
+      x-readme:
+        code-samples:
+          - language: javascript
+            code: >
+              const publicKeyInfoArgs = { 
+                algorithm: 'MPC_ECDSA_SECP256K1',
+                derivationPath: [44, 0, 0, 0, 0],
+                compressed: true
+              };
+
+              const pubKey = await fireblocks.NCW.getPublicKeyInfo(walletId,
+              publicKeyInfoArgs);
+            name: Fireblocks SDK Javascript example
+          - language: typescript
+            code: >-
+              const response: Promise<FireblocksResponse<PublicKeyInformation>>
+              =
+              fireblocks.embeddedWallets.getPublicKeyInfoNcw(embeddedWalletsApiGetPublicKeyInfoNcwRequest);
+            name: Fireblocks SDK TypeScript example
+          - language: java
+            code: >-
+              CompletableFuture<ApiResponse<PublicKeyInformation>> response =
+              fireblocks.embeddedWallets().getPublicKeyInfoNcw(walletId,
+              derivationPath, algorithm, compressed);
+            name: Fireblocks SDK Java example
+          - language: python
+            code: >-
+              response =
+              fireblocks.embedded_wallets.get_public_key_info_ncw(wallet_id,
+              derivation_path, algorithm, compressed);
+            name: Fireblocks SDK Python example
+      parameters:
+        - in: path
+          name: walletId
+          description: The ID of the Non-Custodial wallet
+          required: true
+          schema:
+            type: string
+            example: 550e8400-e29b-41d4-a716-446655440000
+        - in: query
+          name: derivationPath
+          description: >
+            An array of integers (passed as JSON stringified array) representing
+            the full BIP44 derivation path of the requested public key. 
+
+            The first element must always be 44.
+          required: true
+          example:
+            - 44
+            - 0
+            - 0
+            - 0
+            - 0
+          schema:
+            type: string
+        - in: query
+          name: algorithm
+          description: Elliptic Curve
+          required: true
+          schema:
+            type: string
+            enum:
+              - MPC_ECDSA_SECP256K1
+              - MPC_ECDSA_SECP256R1
+              - MPC_EDDSA_ED25519
+        - in: query
+          name: compressed
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Public key information
+          headers:
+            X-Request-ID:
+              $ref: '#/components/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicKeyInformation'
+        default:
+          $ref: '#/components/responses/Error'
+      operationId: getPublicKeyInfoNcw
+      x-codeSamples:
+        - lang: TypeScript
+          source: >-
+            const response: Promise<FireblocksResponse<PublicKeyInformation>> =
+            fireblocks.embeddedWallets.getPublicKeyInfoNcw(embeddedWalletsApiGetPublicKeyInfoNcwRequest);
+        - lang: Java
+          source: >-
+            CompletableFuture<ApiResponse<PublicKeyInformation>> response =
+            fireblocks.embeddedWallets().getPublicKeyInfoNcw(walletId,
+            derivationPath, algorithm, compressed);
+        - lang: Python
+          source: >-
+            response =
+            fireblocks.embedded_wallets.get_public_key_info_ncw(wallet_id,
+            derivation_path, algorithm, compressed);
   /v1/ncw/wallets/{walletId}/accounts:
     post:
       operationId: createAccount
