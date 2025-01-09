@@ -161,6 +161,7 @@ paths:
     get:
       operationId: getWalletSetupState
       summary: Get wallet key setup state
+      description: Get all the key setup status under a specific Non Custodial Wallet
       parameters:
         - name: walletId
           required: true
@@ -875,6 +876,7 @@ paths:
               )
             name: Fireblocks Javascript NCW SDK example
       summary: Retrieve supported assets
+      description: Get all the available supported assets for the Non Custodial Wallet
       parameters:
         - name: pageCursor
           required: false
@@ -943,6 +945,7 @@ paths:
     get:
       operationId: getDeviceSetupState
       summary: Get device key setup state
+      description: Get the state of the specific device setup key under a specific Non Custodial Wallet
       parameters:
         - name: walletId
           required: true
