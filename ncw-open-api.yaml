@@ -156,7 +156,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/LatestBackupResponse"
         "404":
-          description: Not found
+          description: No backup found for this wallet
       tags:
         - Non Custodial Wallets
   /v1/wallets/{walletId}/setup_status:
